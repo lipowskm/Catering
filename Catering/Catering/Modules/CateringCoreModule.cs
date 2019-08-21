@@ -13,6 +13,7 @@ namespace Catering.Modules
             Bind<MainViewModel>().ToSelf();
             Bind<DetailViewModel>().ToSelf();
             Bind<NewEntryViewModel>().ToSelf();
+            Bind<SelectPlaceViewModel>().ToSelf();
 
             // Core Services
             var cateringService = new CateringApiDataService(new

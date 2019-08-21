@@ -28,6 +28,8 @@ namespace Catering.Modules
                                            typeof(DetailPage));
             navService.RegisterViewMapping(typeof(NewEntryViewModel),
                                            typeof(NewEntryPage));
+            navService.RegisterViewMapping(typeof(SelectPlaceViewModel),
+                                           typeof(SelectPlacePage));
             Bind<INavService>()
               .ToMethod(x => navService)
               .InSingletonScope();
