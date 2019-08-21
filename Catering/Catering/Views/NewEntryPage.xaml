@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Catering.Controls;assembly=Catering"
+             xmlns:converters="clr-namespace:Catering.Converters;assembly=Catering"
+             mc:Ignorable="d"
+             x:Class="Catering.Views.NewEntryPage"
+             Title="New Entry">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBooleanConverter 
+                      x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <TableView Intent="Form" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                <TableView.Root>
+                    <TableSection>
+                        <EntryCell Label="Title" Text="{Binding Title}" />
+                        <EntryCell Label="Latitude" Text="{Binding Latitude}" />
+                        <EntryCell Label="Longitude" Text="{Binding Longitude}" />
+                        <controls:DatePickerEntryCell Label="Date" 
+                                  Date="{Binding Date, StringFormat='{0:d}'}"/>
+                        <EntryCell Label="Rating" Text="{Binding Rating}" />
+                        <EntryCell Label="Notes" Text="{Binding Notes}" />
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+            <StackLayout Orientation="Vertical" 
+                  VerticalOptions="Center" 
+                  HorizontalOptions="Center" 
+                  IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Zapisywanie cateringu..." />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:converters="clr-namespace:Catering.Converters;assembly=Catering"
+             mc:Ignorable="d"
+             x:Class="Catering.Views.DetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReverseBooleanConverter 
+                      x:Key="ReverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <maps:Map x:Name="map" Grid.RowSpan="3" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+
+            <BoxView Grid.Row="1" BackgroundColor="White" 
+                           Opacity=".8" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}"/>
+
+            <StackLayout Padding="10" Grid.Row="1" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
+                <Label x:Name="title" 
+                       HorizontalOptions="Center" 
+                       Text="{Binding Entry.Title}" 
+                       AutomationProperties.IsInAccessibleTree="true"
+                       AutomationProperties.HelpText="Tytuł cateringu"/>
+                <Label x:Name="date" 
+                       HorizontalOptions="Center" 
+                       Text="{Binding Entry.Date, StringFormat='{0:M}'}" 
+                       AutomationProperties.IsInAccessibleTree="true"
+                       AutomationProperties.HelpText="Data cateringu"/>
+                <Label x:Name="rating" 
+                       HorizontalOptions="Center" 
+                       Text="{Binding Entry.Rating, StringFormat='{0} star rating'}" 
+                       AutomationProperties.IsInAccessibleTree="true"
+                       AutomationProperties.HelpText="Ocena"/>
+                <Label x:Name="notes" 
+                       HorizontalOptions="Center" 
+                       Text="{Binding Entry.Notes}" 
+                       AutomationProperties.IsInAccessibleTree="true"
+                       AutomationProperties.HelpText="Opis cateringu"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" 
+                  VerticalOptions="Center" 
+                  HorizontalOptions="Center" 
+                  IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Usuwanie cateringu..." />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Usuń" Clicked="DeleteItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+</ContentPage>
