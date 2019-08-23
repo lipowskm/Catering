@@ -96,6 +96,15 @@ namespace Catering.ViewModels
                            => await _cateringService.GetEntriesAsync())
                           .Subscribe(entries
                            => CateringEntries = new ObservableCollection<CateringEntry>(entries));
+
+                //delete before release
+                CateringEntries.Add(new CateringEntry
+                {
+                    Title = "Test",
+                    Latitude = 25,
+                    Longitude = 25,
+                    Date = DateTime.Now
+                });
             }
             finally
             {

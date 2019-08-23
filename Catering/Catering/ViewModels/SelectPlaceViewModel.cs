@@ -56,6 +56,8 @@ namespace Catering.ViewModels
             {
                 await _cateringService.AddEntryAsync(Entry);
                 await NavService.NavigateTo<MainViewModel>();
+                await NavService.ClearBackStack();
+                await NavService.ClearBackStack();
             }
             finally
             {
