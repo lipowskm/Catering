@@ -17,7 +17,7 @@ namespace Catering.Modules
 
             // Core Services
             var cateringService = new CateringApiDataService(new
-                Uri("https://cateringapp.azurewebsites.net"));
+                Uri("https://5d66c6f06847d40014f65b97.mockapi.io"));
 
             Bind<ICateringDataService>()
                 .ToMethod(x => cateringService)
