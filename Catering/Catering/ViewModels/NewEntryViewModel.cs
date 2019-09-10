@@ -19,7 +19,7 @@ namespace Catering.ViewModels
             {
                 _title = value;
                 OnPropertyChanged();
-                SaveCommand.ChangeCanExecute();
+                SelectPlaceCommand.ChangeCanExecute();
             }
         }
 
@@ -88,43 +88,29 @@ namespace Catering.ViewModels
             Rating = 1;
         }
 
-        Command _saveCommand;
-        public Command SaveCommand
+        Command _selectPlaceCommand;
+        public Command SelectPlaceCommand
         {
             get
             {
-                return _saveCommand
-                    ?? (_saveCommand = new Command(async () => await ExecuteSaveCommand(), CanSave));
+                return _selectPlaceCommand
+                    ?? (_selectPlaceCommand = new Command(async () => await ExecuteSelectPlaceCommand(), CanSave));
             }
         }
 
         // ...
 
-        async Task ExecuteSaveCommand()
+        async Task ExecuteSelectPlaceCommand()
         {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
-            try
+            var newItem = new CateringEntry
             {
-                var newItem = new CateringEntry
-                {
-                    Title = Title,
-                    Latitude = Latitude,
-                    Longitude = Longitude,
-                    Date = Date,
-                    Rating = Rating,
-                    Notes = Notes
-                };
-                await _cateringService.AddEntryAsync(newItem);
-                await NavService.GoBack();
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+                Title = Title,
+                Latitude = Latitude,
+                Longitude = Longitude,
+                Date = Date,
+                Notes = Notes
+            };
+            await NavService.NavigateTo<SelectPlaceViewModel, CateringEntry>(newItem);
         }
 
         bool CanSave()

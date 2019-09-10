@@ -29,24 +29,16 @@
             <StackLayout Padding="10" Grid.Row="1" IsVisible="{Binding IsBusy, Converter={StaticResource ReverseBooleanConverter}}">
                 <Label x:Name="title" 
                        HorizontalOptions="Center" 
-                       Text="{Binding Entry.Title}" 
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Tytuł cateringu"/>
+                       Text="{Binding Entry.Title}" />
                 <Label x:Name="date" 
                        HorizontalOptions="Center" 
-                       Text="{Binding Entry.Date, StringFormat='{0:M}'}" 
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Data cateringu"/>
-                <Label x:Name="rating" 
+                       Text="{Binding Entry.Date, StringFormat='{0:M}'}" />
+                <Label x:Name="address" 
                        HorizontalOptions="Center" 
-                       Text="{Binding Entry.Rating, StringFormat='{0} star rating'}" 
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Ocena"/>
+                       Text="{Binding Entry.Address}" />
                 <Label x:Name="notes" 
                        HorizontalOptions="Center" 
-                       Text="{Binding Entry.Notes}" 
-                       AutomationProperties.IsInAccessibleTree="true"
-                       AutomationProperties.HelpText="Opis cateringu"/>
+                       Text="{Binding Entry.Notes}" />
             </StackLayout>
             <StackLayout Orientation="Vertical" 
                   VerticalOptions="Center" 

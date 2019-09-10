@@ -44,6 +44,7 @@ namespace Catering.ViewModels
                 {
                     await _cateringService.RemoveEntryAsync(Entry);
                     await NavService.GoBack();
+                    await NavService.ClearBackStack();
                 }
 
                 finally

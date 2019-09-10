@@ -4,6 +4,7 @@ using Catering.ViewModels;
 using Ninject.Modules;
 using Ninject;
 using Catering.Modules;
+using Catering.Services;
 
 namespace Catering
 {
@@ -13,6 +14,7 @@ namespace Catering
         public App(params INinjectModule[] platformModules)
         {
             InitializeComponent();
+            GoogleMapsApiService.Initialize("AIzaSyCUsCIh3EgQ74aJ3XJ2kvfMPXQ8jH9veyk");
 
             var mainPage = new NavigationPage(new MainPage());
 
