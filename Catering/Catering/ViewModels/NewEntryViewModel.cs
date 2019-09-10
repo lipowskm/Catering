@@ -108,7 +108,6 @@ namespace Catering.ViewModels
                 Latitude = Latitude,
                 Longitude = Longitude,
                 Date = Date,
-                Rating = Rating,
                 Notes = Notes
             };
             await NavService.NavigateTo<SelectPlaceViewModel, CateringEntry>(newItem);

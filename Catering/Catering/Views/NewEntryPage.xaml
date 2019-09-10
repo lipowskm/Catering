@@ -12,11 +12,10 @@
             <TableView Intent="Form">
                 <TableView.Root>
                     <TableSection>
-                        <EntryCell Label="Title" Text="{Binding Title}" />
-                        <controls:DatePickerEntryCell Label="Date" 
+                        <EntryCell Label="Tytuł" Text="{Binding Title}" />
+                        <controls:DatePickerEntryCell Label="Data" 
                                   Date="{Binding Date, StringFormat='{0:d}'}"/>
-                        <EntryCell Label="Rating" Text="{Binding Rating}" />
-                        <EntryCell Label="Notes" Text="{Binding Notes}" />
+                        <EntryCell Label="Uwagi" Text="{Binding Notes}" />
                     </TableSection>
                 </TableView.Root>
             </TableView>

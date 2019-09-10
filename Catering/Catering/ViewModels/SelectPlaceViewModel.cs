@@ -38,12 +38,12 @@ namespace Catering.ViewModels
                 _placeSelected = value;
                 OnPropertyChanged();
                 if (_placeSelected != null)
-                    GetPlaceDetailCommand.Execute(_placeSelected);
+                    SaveEntryCommand.Execute(_placeSelected);
             }
         }
 
         public ICommand GetPlacesCommand { get; set; }
-        public ICommand GetPlaceDetailCommand { get; set; }
+        public ICommand SaveEntryCommand { get; set; }
 
         ObservableCollection<GooglePlaceAutoCompletePrediction> _places;
         public ObservableCollection<GooglePlaceAutoCompletePrediction> Places
@@ -110,7 +110,7 @@ namespace Catering.ViewModels
         {
             _cateringService = cateringService;
             GetPlacesCommand = new Command<string>(async (param) => await GetPlacesByName(param));
-            GetPlaceDetailCommand = new Command<GooglePlaceAutoCompletePrediction>(async (param) => await GetPlacesDetail(param));
+            SaveEntryCommand = new Command<GooglePlaceAutoCompletePrediction>(async (param) => await SaveEntry(param));
         }
 
         public override async Task Init(CateringEntry cateringEntry)
@@ -132,7 +132,7 @@ namespace Catering.ViewModels
             ShowRecentPlaces = (placeResult == null || placeResult.Count == 0);
         }
 
-        public async Task GetPlacesDetail(GooglePlaceAutoCompletePrediction placeA)
+        public async Task SaveEntry(GooglePlaceAutoCompletePrediction placeA)
         {
             var place = await googleMapsApi.GetPlaceDetails(placeA.PlaceId);
             if (place != null)
@@ -140,6 +140,7 @@ namespace Catering.ViewModels
                     PickupText = place.Name;
                     Entry.Latitude = place.Latitude;
                     Entry.Longitude = place.Longitude;
+                    Entry.Address = place.Name;
 
                     if (IsBusy)
                         return;
